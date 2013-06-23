@@ -3,7 +3,7 @@ require 'securerandom'
 
 module OpenVPN
   PATH = '/etc/openvpn'
-  VERSION = '0.0'
+  VERSION = '0.1'
 
   # returns an array of ['configfile','pid'] entries
   # eg: [ ["homevpn/vpn.ovpn","1234"], ... ]
