@@ -3,7 +3,7 @@ require 'securerandom'
 
 module OpenVPN
   PATH = '/etc/openvpn'
-  VERSION = '0.1'
+  VERSION = '0.2'
 
   # returns an array of ['configfile','pid'] entries
   # eg: [ ["homevpn/vpn.ovpn","1234"], ... ]
@@ -40,7 +40,8 @@ module OpenVPN
       puts "Profile '#{p}' is already running (pid: #{pid})."
     else
       # start openvpn
-      run_as_root "openvpn --config '#{path}' > /var/log/openvpn-#{SecureRandom::uuid} 2>&1",  File::dirname(path), true
+      pname = p.gsub /[\/ !?$#]/,'_'
+      run_as_root "openvpn --config '#{path}' > /var/log/ovpn-#{pname}-#{SecureRandom::uuid} 2>&1",  File::dirname(path), true
     end
   end
 
